@@ -1,4 +1,5 @@
 ﻿using System;
+using CsvValidator.DataLoader;
 
 namespace CsvValidator.Client
 {
@@ -6,7 +7,7 @@ namespace CsvValidator.Client
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Console.WriteLine("Dev in progress...");
         }
     }
 }

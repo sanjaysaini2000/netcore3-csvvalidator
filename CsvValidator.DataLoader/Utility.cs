@@ -1,5 +1,6 @@
 using System;
 using System.Configuration;
+using System.IO;
 
 namespace CsvValidator.DataLoader
 {
@@ -14,7 +15,17 @@ namespace CsvValidator.DataLoader
 
         public static String GetSchemaFile()
         {
-            return ConfigurationManager.AppSettings["schemafile"];
+            return ConfigurationManager.AppSettings["validationfile"];
         }
+
+        public static string ValidatedCsvFileName()
+        {
+            string csvFilePath = Utility.GetCsvFile();
+            string path = Path.GetDirectoryName(csvFilePath);
+            string filename = Path.GetFileNameWithoutExtension(csvFilePath) + "_" + "validated.csv";
+            return Path.Combine(path, filename);
+
+        }
+
     }
 }
