@@ -1,8 +1,0 @@
-C:\Sandbox\VSCodeProjects\CsvValidatorApp\CsvValidator.DataLoader\bin\Debug\netstandard2.0\CsvValidator.DataLoader.deps.json
-C:\Sandbox\VSCodeProjects\CsvValidatorApp\CsvValidator.DataLoader\bin\Debug\netstandard2.0\CsvValidator.DataLoader.dll
-C:\Sandbox\VSCodeProjects\CsvValidatorApp\CsvValidator.DataLoader\bin\Debug\netstandard2.0\CsvValidator.DataLoader.pdb
-C:\Sandbox\VSCodeProjects\CsvValidatorApp\CsvValidator.DataLoader\obj\Debug\netstandard2.0\CsvValidator.DataLoader.csprojAssemblyReference.cache
-C:\Sandbox\VSCodeProjects\CsvValidatorApp\CsvValidator.DataLoader\obj\Debug\netstandard2.0\CsvValidator.DataLoader.AssemblyInfoInputs.cache
-C:\Sandbox\VSCodeProjects\CsvValidatorApp\CsvValidator.DataLoader\obj\Debug\netstandard2.0\CsvValidator.DataLoader.AssemblyInfo.cs
-C:\Sandbox\VSCodeProjects\CsvValidatorApp\CsvValidator.DataLoader\obj\Debug\netstandard2.0\CsvValidator.DataLoader.dll
-C:\Sandbox\VSCodeProjects\CsvValidatorApp\CsvValidator.DataLoader\obj\Debug\netstandard2.0\CsvValidator.DataLoader.pdb
