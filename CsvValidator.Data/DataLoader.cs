@@ -6,7 +6,7 @@ using Microsoft.VisualBasic.FileIO;
 using System.Text;
 using System.IO;
 
-namespace CsvValidator.DataLoader
+namespace CsvValidator.Data
 {
     public class DataLoader : IDataLoader
     {

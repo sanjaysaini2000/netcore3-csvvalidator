@@ -1,5 +1,5 @@
 using System;
-namespace CsvValidator.DataLoader
+namespace CsvValidator.Data
 {
     /// <summary>
     /// This interface declares CSV data and CSV validation data loading functionality

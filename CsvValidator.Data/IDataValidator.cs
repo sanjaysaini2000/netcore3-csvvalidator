@@ -1,6 +1,6 @@
 using System.Data;
 
-namespace CsvValidator.DataLoader
+namespace CsvValidator.Data
 {
     /// <summary>
     /// This interface declares validation functionality on CSV Data using CSV validation data.

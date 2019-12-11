@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CsvValidator.DataLoader\CsvValidator.DataLoader.csproj" />
+    <ProjectReference Include="..\CsvValidator.Data\CsvValidator.Data.csproj" />
   </ItemGroup>
 
 </Project>

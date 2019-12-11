@@ -1,5 +1,5 @@
 ﻿using System;
-using CsvValidator.DataLoader;
+using CsvValidator.Data;
 
 namespace CsvValidator.Client
 {

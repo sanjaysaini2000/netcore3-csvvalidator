@@ -2,7 +2,7 @@ using System;
 using System.Configuration;
 using System.IO;
 
-namespace CsvValidator.DataLoader
+namespace CsvValidator.Data
 {
     static public class Utility
     {
