@@ -3,6 +3,8 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Data;
 using Microsoft.VisualBasic.FileIO;
+using System.Text;
+using System.IO;
 
 namespace CsvValidator.DataLoader
 {
@@ -48,6 +50,36 @@ namespace CsvValidator.DataLoader
         public void LoadCsvValidation()
         {
             //todo
+        }
+
+        public void RenderValidatedCsvData()
+        {
+            var columnsHeader = CsvRawData.Columns.Cast<DataColumn>().Select(c => c.ColumnName).ToList();
+            StringBuilder csvData = new StringBuilder();
+            csvData.AppendLine(string.Join(",", columnsHeader));
+            foreach (DataRow row in CsvRawData.Rows)
+            {
+                var columns = row.ItemArray.Select(x => x.ToString()).ToList();
+                var i = columns.FindIndex(x => x.Contains(","));
+                if (i != -1)
+                {
+                    var col = columns.ElementAt(i);
+                    col = Utility.UpdateColumnValue(col, '"', '"');
+                    columns[i] = "\"" + col + "\"";
+                }
+                csvData.AppendLine(string.Join(",", columns));
+            }
+            ValidatedCsvData = csvData.ToString().Trim('{', '}');
+        }
+
+        public void GenerateValidatedCsvDataFile()
+        {
+            RenderValidatedCsvData();
+            using (StreamWriter sw = new StreamWriter(Utility.ValidatedCsvFileName(), false))
+            {
+                sw.Write(ValidatedCsvData);
+                sw.Flush();
+            }
         }
 
     }

@@ -18,6 +18,19 @@ namespace CsvValidator.DataLoader
             return ConfigurationManager.AppSettings["validationfile"];
         }
 
+        public static string UpdateColumnValue(string colVlaue, char findChar, char insertChar)
+        {
+            int startIndex = 0;
+            int colIndex = colVlaue.IndexOf(findChar, startIndex);
+            while (colIndex != -1)
+            {
+                colVlaue = colVlaue.Insert(colIndex, insertChar.ToString());
+                startIndex = colIndex + 2;
+                colIndex = colVlaue.IndexOf(findChar, startIndex);
+            }
+            return colVlaue;
+        }
+
         public static string ValidatedCsvFileName()
         {
             string csvFilePath = Utility.GetCsvFile();

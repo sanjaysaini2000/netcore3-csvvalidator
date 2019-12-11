@@ -7,7 +7,7 @@ namespace CsvValidator.Client
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Dev in progress...");
+            Console.WriteLine(Utility.GetCsvFile());
         }
     }
 }
