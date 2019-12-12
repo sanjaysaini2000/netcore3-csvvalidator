@@ -5,6 +5,7 @@ using System.Data;
 using Microsoft.VisualBasic.FileIO;
 using System.Text;
 using System.IO;
+using System.Xml.Linq;
 
 namespace CsvValidator.Data
 {
@@ -49,7 +50,32 @@ namespace CsvValidator.Data
 
         public void LoadCsvValidation()
         {
-            //todo
+            string schemaFile = Utility.GetSchemaFile();
+            List<CvsValidation> schemas = new List<CvsValidation>();
+            var table = XElement.Load(schemaFile).Elements("table").ToList();
+            foreach (var column in table.Elements("column"))
+            {
+                CvsValidation schema = new CvsValidation();
+                schema.Name = column.Attribute("name").Value;
+                schema.IsUnique = column.Attribute("isunique").Value;
+                schema.IsNull = column.Attribute("isnull").Value;
+                schema.DefaultValue = column.Attribute("default").Value;
+                schemas.Add(schema);
+            }
+            CvsColumnsSchema = schemas;
+        }
+
+        public void ValidateData()
+        {
+            foreach (var item in CvsColumnsSchema)
+            {
+                if (Convert.ToBoolean(item.IsUnique))
+                    CsvRawData = _dataValidator.ValidateUniqueDataColumn(CsvRawData, item.Name);
+                if (!Convert.ToBoolean(item.IsNull))
+                    CsvRawData = _dataValidator.ValidateMissingDataColumn(CsvRawData, item.Name);
+                if (!string.IsNullOrEmpty(item.DefaultValue))
+                    CsvRawData = _dataValidator.ValidateDefaultValueDataColumn(CsvRawData, item.Name, item.DefaultValue);
+            }
         }
 
         public void RenderValidatedCsvData()

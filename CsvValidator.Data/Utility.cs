@@ -9,13 +9,12 @@ namespace CsvValidator.Data
 
         public static String GetCsvFile()
         {
-
-            return ConfigurationManager.AppSettings["csvfile"];
+            return Path.GetFullPath(ConfigurationManager.AppSettings["csvfile"]);
         }
 
         public static String GetSchemaFile()
         {
-            return ConfigurationManager.AppSettings["validationfile"];
+            return Path.GetFullPath(ConfigurationManager.AppSettings["validationfile"]);
         }
 
         public static string UpdateColumnValue(string colVlaue, char findChar, char insertChar)

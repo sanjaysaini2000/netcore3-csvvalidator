@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<root>
+  <table>
+    <column name="Order ID" isunique="true" isnull="false" default=""/>
+    <column name="Order Date" isunique="false" isnull="false" default=""/>
+    <column name="Ship Date" isunique="false" isnull="false" default=""/>
+    <column name="Ship Mode" isunique="false" isnull="true" default=""/>
+    <column name="Quantity" isunique="false" isnull="false" default=""/>
+    <column name="Discount" isunique="false" isnull="true" default="0"/>
+    <column name="Profit" isunique="false" isnull="false" default=""/>
+    <column name="Product ID" isunique="true" isnull="false" default=""/>
+    <column name="Customer Name" isunique="false" isnull="false" default=""/>
+    <column name="Category" isunique="false" isnull="false" default=""/>
+    <column name="Customer ID" isunique="true" isnull="false" default=""/>
+  </table>
+</root>
