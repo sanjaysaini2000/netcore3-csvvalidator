@@ -1,5 +1,8 @@
 namespace CsvValidator.Data
 {
+    /// <summary>
+    /// Stores validation data for column from the validation xml.
+    /// </summary>
     public class CvsValidation
     {
         public string Name { get; set; }

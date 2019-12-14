@@ -11,16 +11,34 @@ namespace CsvValidator.Data
 {
     public class DataLoader : IDataLoader
     {
-        public List<CvsValidation> CvsColumnsSchema { get; set; }
-        public DataTable CsvRawData { get; set; }
-        public string ValidatedCsvData { get; set; }
-        IDataValidator _dataValidator;
+        /// <summary>
+        /// Stores collection of CSV validations from validation xml file.
+        /// </summary>
+        public List<CvsValidation> CvsValidations { get; set; }
 
-        public DataLoader(IDataValidator dataValidator)
+        /// <summary>
+        /// Stores CSV data from the CSV file.
+        /// </summary>
+        public DataTable CsvRawData { get; set; }
+
+        /// <summary>
+        /// Stores validated CSV formatted data.
+        /// </summary>
+        public string ValidatedCsvData { get; set; }
+
+        /// <summary>
+        /// Holds the reference of DataValidation class.
+        /// </summary>
+        IDataValidator dataValidator;
+
+        public DataLoader(IDataValidator dv)
         {
-            _dataValidator = dataValidator;
+            dataValidator = dv;
         }
 
+        /// <summary>
+        /// Loads data from CSV file into DataTable object.
+        /// </summary>
         public void LoadCsvData()
         {
             string csvFile = Utility.GetCsvFile();
@@ -50,38 +68,47 @@ namespace CsvValidator.Data
             Console.WriteLine(string.Format("{0} rows loaded from the file.", CsvRawData.Rows.Count));
         }
 
+        /// <summary>
+        /// Loads CSV validations from the xml file.
+        /// </summary>
         public void LoadCsvValidation()
         {
-            string schemaFile = Utility.GetSchemaFile();
-            List<CvsValidation> schemas = new List<CvsValidation>();
+            string schemaFile = Utility.GetValidationFile();
+            List<CvsValidation> validations = new List<CvsValidation>();
             var table = XElement.Load(schemaFile).Elements("table").ToList();
             foreach (var column in table.Elements("column"))
             {
-                CvsValidation schema = new CvsValidation();
-                schema.Name = column.Attribute("name").Value;
-                schema.IsUnique = column.Attribute("isunique").Value;
-                schema.IsNull = column.Attribute("isnull").Value;
-                schema.DefaultValue = column.Attribute("default").Value;
-                schemas.Add(schema);
+                CvsValidation validation = new CvsValidation();
+                validation.Name = column.Attribute("name").Value;
+                validation.IsUnique = column.Attribute("isunique").Value;
+                validation.IsNull = column.Attribute("isnull").Value;
+                validation.DefaultValue = column.Attribute("default").Value;
+                validations.Add(validation);
             }
-            CvsColumnsSchema = schemas;
+            CvsValidations = validations;
             Console.WriteLine("CSV validation data loaded.");
         }
 
+        /// <summary>
+        /// Performs CSV validations on the loaded CSV data.
+        /// </summary>
         public void ValidateData()
         {
-            foreach (var item in CvsColumnsSchema)
+            foreach (var item in CvsValidations)
             {
                 if (Convert.ToBoolean(item.IsUnique))
-                    CsvRawData = _dataValidator.ValidateUniqueDataColumn(CsvRawData, item.Name);
+                    CsvRawData = dataValidator.ValidateUniqueDataColumn(CsvRawData, item.Name);
                 if (!Convert.ToBoolean(item.IsNull))
-                    CsvRawData = _dataValidator.ValidateMissingDataColumn(CsvRawData, item.Name);
+                    CsvRawData = dataValidator.ValidateMissingDataColumn(CsvRawData, item.Name);
                 if (!string.IsNullOrEmpty(item.DefaultValue))
-                    CsvRawData = _dataValidator.ValidateDefaultValueDataColumn(CsvRawData, item.Name, item.DefaultValue);
+                    CsvRawData = dataValidator.ValidateDefaultValueDataColumn(CsvRawData, item.Name, item.DefaultValue);
             }
             Console.WriteLine("CSV Data validation completed.");
         }
 
+        /// <summary>
+        /// Reads validated CSV DataTable object and creates a CSV formatted string.
+        /// </summary>
         public void RenderValidatedCsvData()
         {
             var columnsHeader = CsvRawData.Columns.Cast<DataColumn>().Select(c => c.ColumnName).ToList();
@@ -103,6 +130,9 @@ namespace CsvValidator.Data
             Console.WriteLine(string.Format("{0} rows successfully validated.", CsvRawData.Rows.Count));
         }
 
+        /// <summary>
+        /// Reads valdated CSV data from CSV formatted string and writes into CSV file on the disk.
+        /// </summary>
         public void GenerateValidatedCsvDataFile()
         {
             RenderValidatedCsvData();

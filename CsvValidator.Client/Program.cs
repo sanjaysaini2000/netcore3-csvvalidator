@@ -11,12 +11,12 @@ namespace CsvValidator.Client
             try
             {
 
-                IDataValidator _dataValidator = new DataValidator();
-                DataLoader dl = new DataLoader(_dataValidator);
-                dl.LoadCsvData();
-                dl.LoadCsvValidation();
-                dl.ValidateData();
-                dl.GenerateValidatedCsvDataFile();
+                IDataValidator dataValidator = new DataValidator();
+                DataLoader dataLoader = new DataLoader(dataValidator);
+                dataLoader.LoadCsvData();
+                dataLoader.LoadCsvValidation();
+                dataLoader.ValidateData();
+                dataLoader.GenerateValidatedCsvDataFile();
 
                 Console.WriteLine("CSV Validator is completed successfully...");
                 Console.WriteLine("Press any key...");
