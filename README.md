@@ -1,6 +1,6 @@
 # CSV Validator App
 
-This app take the CSV file and validate the data according to the validation provided to it in an xml file and generate the validated csv file at the location of the source CSV file. Both files path are configured in the app configuration file.
+This app takes a CSV file and validate the data according to the validation provided to it in an xml file and generate the validated csv file at the location of the source CSV file. Both files path are configured in the app configuration file. Change the existing sample files with your own files.
 
 ## Prerequisites
 
@@ -37,6 +37,7 @@ Now move to Client project folder and run the app with following commands.
 cd CsvValidator.Client
 dotnet run
 ```
+The app will opperate on sample CSV and validation files. Change these files with your own files by updating path of these files in the app.config file.
 
 ### Running the Tests
 
