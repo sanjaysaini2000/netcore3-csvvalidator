@@ -46,6 +46,8 @@ namespace CsvValidator.Data
                 }
             }
             CsvRawData = csvData;
+            Console.WriteLine("CSV file data is loaded.");
+            Console.WriteLine(string.Format("{0} rows loaded from the file.", CsvRawData.Rows.Count));
         }
 
         public void LoadCsvValidation()
@@ -63,6 +65,7 @@ namespace CsvValidator.Data
                 schemas.Add(schema);
             }
             CvsColumnsSchema = schemas;
+            Console.WriteLine("CSV validation data loaded.");
         }
 
         public void ValidateData()
@@ -76,6 +79,7 @@ namespace CsvValidator.Data
                 if (!string.IsNullOrEmpty(item.DefaultValue))
                     CsvRawData = _dataValidator.ValidateDefaultValueDataColumn(CsvRawData, item.Name, item.DefaultValue);
             }
+            Console.WriteLine("CSV Data validation completed.");
         }
 
         public void RenderValidatedCsvData()
@@ -96,6 +100,7 @@ namespace CsvValidator.Data
                 csvData.AppendLine(string.Join(",", columns));
             }
             ValidatedCsvData = csvData.ToString().Trim('{', '}');
+            Console.WriteLine(string.Format("{0} rows successfully validated.", CsvRawData.Rows.Count));
         }
 
         public void GenerateValidatedCsvDataFile()
@@ -106,7 +111,7 @@ namespace CsvValidator.Data
                 sw.Write(ValidatedCsvData);
                 sw.Flush();
             }
+            Console.WriteLine("Validated CSV file is generated.");
         }
-
     }
 }

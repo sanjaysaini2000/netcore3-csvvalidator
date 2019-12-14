@@ -19,6 +19,8 @@ namespace CsvValidator.Client
                 dl.GenerateValidatedCsvDataFile();
 
                 Console.WriteLine("CSV Validator is completed successfully...");
+                Console.WriteLine("Press any key...");
+                Console.ReadKey();
             }
             catch (Exception ex)
             {
